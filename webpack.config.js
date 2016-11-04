@@ -1,12 +1,12 @@
+var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var urlLoader = require('url-loader');
-var path = require('path');
 
-var phaserModule = path.join(__dirname, '/node_modules/phaser/');
-var phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
-var pixi = path.join(phaserModule, 'build/custom/pixi.js');
-var p2 = path.join(phaserModule, 'build/custom/p2.js');
+// Phaser webpack config
+var phaserModule = path.join(__dirname, '/node_modules/phaser/')
+var phaser = path.join(phaserModule, 'build/custom/phaser-split.js')
+var pixi = path.join(phaserModule, 'build/custom/pixi.js')
+var p2 = path.join(phaserModule, 'build/custom/p2.js')
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -21,14 +21,15 @@ module.exports = {
     alias: {
       'phaser': phaser,
       'pixi': pixi,
-      'p2': p2,
+      'p2': p2
     },
     root: [
       __dirname + "/src/javascripts",
+      __dirname + "/src/images",
       __dirname + "/src/scss",
       __dirname + "/src"
     ],
-    extensions: ['', '.js', '.scss', '.svg']
+    extensions: ['', '.js', '.scss', '.svg', '.png']
   },
 
   module: {
@@ -49,7 +50,7 @@ module.exports = {
 
       {
         test: /\.(jpg|png|svg)$/,
-        loader: 'url'
+        loader: 'file'
       }
 
     ]
@@ -64,6 +65,7 @@ module.exports = {
   devServer: {
     contentBase: "./public",
     colors: true,
+    host: '0.0.0.0',
     historyApiFallback: true,
     inline: true
   }
